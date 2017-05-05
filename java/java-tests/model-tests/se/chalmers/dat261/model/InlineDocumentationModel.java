@@ -15,7 +15,7 @@
  */
 package se.chalmers.dat261.model;
 
-import com.intellij.codeInsight.completion.InlineDocumentationAdapter;
+import com.intellij.codeInsight.documentation.InlineDocumentationAdapter;
 import nz.ac.waikato.modeljunit.FsmModel;
 import nz.ac.waikato.modeljunit.Action;
 
@@ -24,7 +24,6 @@ import nz.ac.waikato.modeljunit.Action;
  * Created by Jacob on 5/5/17.
  */
 public class InlineDocumentationModel implements FsmModel {
-
 
   private enum State {Editor, Check, Fetch, Popup, Window}; // The different states of the model.
   private State currentState = State.Editor; // Initial state is in editor.
@@ -64,6 +63,9 @@ public class InlineDocumentationModel implements FsmModel {
   @Override
   public void reset(boolean b) {
     currentState = State.Editor;
+  }
+
+  public void cleanup() { // TODO implement
   }
 
   /**

@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.intellij.codeInsight.completion;
+package com.intellij.codeInsight.documentation;
 
 import se.chalmers.dat261.adapter.BaseAdapter;
 
 /**
- * Created by fonfalleh on 5/5/17.
+ * Created by Jacob on 5/5/17.
  */
 public class InlineDocumentationAdapter extends BaseAdapter {
   public InlineDocumentationAdapter() throws Exception {
