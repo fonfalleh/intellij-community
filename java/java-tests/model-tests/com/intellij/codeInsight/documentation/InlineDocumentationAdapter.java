@@ -26,6 +26,10 @@ public class InlineDocumentationAdapter extends BaseAdapter {
     super("/model-based/InlineDocumentation.java");
     myDocumentationManager = DocumentationManager.getInstance(myEditor.getProject());
     System.out.println("Hello!");
+    DocumentationComponent comp = new DocumentationComponent(myDocumentationManager);
+    System.out.println("Hello!");
+    myDocumentationManager.showJavaDocInfo(myEditor, myFile, false);
+
   }
   private DocumentationManager myDocumentationManager;
 

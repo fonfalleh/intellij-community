@@ -39,7 +39,7 @@ public class BaseAdapter extends LightIntentionActionTestCase {
     return "testBlaBla";
   }
 
-  protected BaseAdapter() {
+  private BaseAdapter() {
 
   }
 

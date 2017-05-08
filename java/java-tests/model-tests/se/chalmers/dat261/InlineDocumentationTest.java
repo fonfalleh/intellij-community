@@ -34,7 +34,7 @@ import javax.swing.*;
 
 
 public class InlineDocumentationTest extends TestCase {
-  public void testCompletion() throws Exception {
+  public void testInlineDocumentation() throws Exception {
     SwingUtilities.invokeAndWait(() -> {
       InlineDocumentationModel docModel = null;
       try {
