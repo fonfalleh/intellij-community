@@ -24,4 +24,58 @@ public class InlineDocumentationAdapter extends BaseAdapter {
   public InlineDocumentationAdapter() throws Exception {
     super("/model-based/InlineDocumentation.java");
   }
+
+  public void placeCaretNoElem() {
+  }
+
+  public void placeCaretField() {
+  }
+
+  public void placeCaretMethod() {
+  }
+
+  public void placeCaretClass() {
+  }
+
+  public void placeCaretPackage() {
+  }
+
+  public void checkCaretElement() {
+  }
+
+  public void fetchDocumentation() {
+  }
+
+  public void displayDocumentation() {
+  }
+
+  public void openToolWindow() {
+  }
+
+  public void restorePopup() {
+  }
+
+  public void followLink() {
+  }
+
+  public void historyBack() {
+  }
+
+  public void historyFwd() {
+  }
+
+  public void fontSizeUp() {
+  }
+
+  public void fontSizeDown() {
+  }
+
+  public void closeDoc() {
+  }
+
+  public void editInSource() {
+  }
+
+  public void toggleAutoUpdate() {
+  }
 }

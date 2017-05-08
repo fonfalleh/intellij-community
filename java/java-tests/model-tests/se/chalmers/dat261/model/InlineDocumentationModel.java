@@ -41,13 +41,13 @@ public class InlineDocumentationModel implements FsmModel {
   private boolean autoUpdate = false;
 
   // Size of documentation history back/fwd stack.
-  int histBack = 0;
-  int histFwd = 0;
+  private int histBack = 0;
+  private int histFwd = 0;
 
   // Current font size and it's limits.
-  int fontSize = 3;
-  final int MIN_FONTSIZE = 1;
-  final int MAX_FONTSIZE = 7;
+  private int fontSize = 3;
+  private final int MIN_FONTSIZE = 1;
+  private final int MAX_FONTSIZE = 7;
 
 
 
@@ -62,7 +62,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Override
   public void reset(boolean b) {
-    currentState = State.Editor;
+    currentState = State.Editor; //TODO from each state, make sure niceness.
   }
 
   public void cleanup() { // TODO implement
@@ -73,7 +73,13 @@ public class InlineDocumentationModel implements FsmModel {
    */
 
   @Action
-  public void placeCaretNoElem() { // TODO implement
+  public void placeCaretNoElem() {
+    adapter.placeCaretNoElem();
+    if (currentState == State.Popup) {
+      currentState = State.Editor;
+      histBack = 0; // TODO Or when creating new doc?
+      histFwd  = 0;
+    }
     caretElement = editorElement.NoElem;
   }
   public boolean placeCaretNoElemGuard() {
@@ -81,6 +87,7 @@ public class InlineDocumentationModel implements FsmModel {
   }
   @Action
   public void placeCaretField() { // TODO implement
+    adapter.placeCaretField();
     caretElement = editorElement.Field;
   }
   public boolean placeCaretFieldGuard() {
@@ -89,6 +96,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void placeCaretMethod() { // TODO implement
+    adapter.placeCaretMethod();
     caretElement = editorElement.Method;
   }
   public boolean placeCaretMethodGuard() {
@@ -97,6 +105,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void placeCaretClass() { // TODO implement
+    adapter.placeCaretClass();
     caretElement = editorElement.Class;
   }
   public boolean placeCaretClassGuard() {
@@ -105,7 +114,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void placeCaretPackage() {
-    // TODO adapter.placeCaretPackage();
+    adapter.placeCaretPackage();
     caretElement = editorElement.Package;
   }
   public boolean placeCaretPackageGuard() {
@@ -114,7 +123,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void checkCaretElement() {
-    //TODO adapter.checkCaretElement();
+    adapter.checkCaretElement();
     currentState = State.Check;
   }
   public boolean checkCaretElementGuard() {
@@ -123,7 +132,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void fetchDocumentation() {
-    //TODO adapter.fetchDocumentation();
+    adapter.fetchDocumentation();
     currentState = State.Fetch;
   }
   public boolean fetchDocumentationGuard() {
@@ -132,7 +141,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void displayDocumentation() {
-    //TODO adapter.displayDocumentation();
+    adapter.displayDocumentation();
     if(window){
       currentState = State.Window;
     }
@@ -146,7 +155,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void openToolWindow() {
-    //TODO adapter.openToolWindow();
+    adapter.openToolWindow();
     window = true;
     currentState = State.Window;
   }
@@ -156,7 +165,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void restorePopup() {
-    //TODO adapter.restorePopup();
+    adapter.restorePopup();
     window = false;
     currentState = State.Popup;
   }
@@ -166,7 +175,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void followLink() {
-    //TODO adapter.followLink();
+    adapter.followLink();
     histBack++;
     histFwd = 0;
   }
@@ -176,7 +185,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void historyBack() {
-    //TODO adapter.historyBack();
+    adapter.historyBack();
     histBack--;
     histFwd++;
   }
@@ -186,7 +195,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void historyFwd() {
-    //TODO adapter.historyFwd();
+    adapter.historyFwd();
     histFwd--;
     histBack++;
 
@@ -197,7 +206,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void fontSizeUp() {
-    //TODO adapter.fontSizeUp();
+    adapter.fontSizeUp();
     fontSize++;
   }
   public boolean fontSizeUpGuard() {
@@ -206,7 +215,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void fontSizeDown() {
-    //TODO adapter.fontSizeDown();
+    adapter.fontSizeDown();
     fontSize--;
   }
   public boolean fontSizeDownGuard() {
@@ -216,7 +225,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void closeDoc() {
-    //TODO closeDoc();
+    adapter.closeDoc();
     histBack = 0;
     histFwd = 0;
     currentState = State.Editor;
@@ -227,7 +236,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void editInSource() {
-    //TODO adapter.editInSource();
+    adapter.editInSource();
     if(currentState == State.Popup){
       currentState = State.Editor;
     }
@@ -239,6 +248,7 @@ public class InlineDocumentationModel implements FsmModel {
 
   @Action
   public void toggleAutoUpdate() {
+    adapter.toggleAutoUpdate();
     autoUpdate = !autoUpdate;
   }
   public boolean toggleAutoUpdateGuard() {
