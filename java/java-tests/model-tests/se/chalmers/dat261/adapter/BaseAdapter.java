@@ -34,6 +34,11 @@ public class BaseAdapter extends LightIntentionActionTestCase {
     configureByFile(testDocument);
   }
 
+  @Override
+  public String getName() {
+    return "testBlaBla";
+  }
+
   protected BaseAdapter() {
 
   }

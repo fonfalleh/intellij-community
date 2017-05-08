@@ -15,6 +15,7 @@
  */
 package com.intellij.codeInsight.documentation;
 
+import com.intellij.openapi.actionSystem.IdeActions;
 import se.chalmers.dat261.adapter.BaseAdapter;
 
 /**
@@ -23,9 +24,14 @@ import se.chalmers.dat261.adapter.BaseAdapter;
 public class InlineDocumentationAdapter extends BaseAdapter {
   public InlineDocumentationAdapter() throws Exception {
     super("/model-based/InlineDocumentation.java");
+    myDocumentationManager = DocumentationManager.getInstance(myEditor.getProject());
+    System.out.println("Hello!");
   }
+  private DocumentationManager myDocumentationManager;
 
   public void placeCaretNoElem() {
+    myEditor.getCaretModel().moveToOffset(0); //TODO TEST
+    //TODO specific caret positions, from editor. Should be straightforward.
   }
 
   public void placeCaretField() {
@@ -41,21 +47,28 @@ public class InlineDocumentationAdapter extends BaseAdapter {
   }
 
   public void checkCaretElement() {
+    executeAction(IdeActions.ACTION_QUICK_JAVADOC); //TODO TEST
   }
 
-  public void fetchDocumentation() {
+  public void fetchDocumentation() { //Automatic?
+
   }
 
-  public void displayDocumentation() {
+  public void displayDocumentation() { //Automatic?
+    //myEditor.getProject().
+    myEditor.getProject();
   }
 
   public void openToolWindow() {
+    // Given component that is popup, display same info in window
   }
 
   public void restorePopup() {
+    // And vice versa
   }
 
   public void followLink() {
+
   }
 
   public void historyBack() {
@@ -78,4 +91,9 @@ public class InlineDocumentationAdapter extends BaseAdapter {
 
   public void toggleAutoUpdate() {
   }
+
+  public String getName() {
+    return "testInlineDocumentation";
+  }
+
 }
